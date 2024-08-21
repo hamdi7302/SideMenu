@@ -24,7 +24,7 @@ struct SideMenuContent< Content: View , Tool: View>: View {
     @State var SettingsButtons : [ImageButtonItem] = []
     
     @State var showMenu : Bool = true
-    public init( selection : Binding<ImageButtonItem>, @ViewBuilder content:() -> Content, @ViewBuilder tool:() -> Tool)
+    init( selection : Binding<ImageButtonItem>, @ViewBuilder content:() -> Content, @ViewBuilder tool:() -> Tool)
     {
         self.content = content()
         _selection  = selection

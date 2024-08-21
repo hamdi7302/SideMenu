@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct SideMenu: View {
+public struct SideMenu: View {
     @Binding var selectedSide: ImageButtonItem
     @Binding var mainSideButtons: [ImageButtonItem]
     @Binding var othersSideButtons: [ImageButtonItem]
     @Binding var settingsSideButtons: [ImageButtonItem]
     
-    var body: some View {
+    public var body: some View {
         VStack {
             VStack(alignment: .leading){
                 Image(systemName: "apple.logo")

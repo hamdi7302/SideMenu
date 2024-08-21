@@ -94,9 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				366D6FF52C76582A008955C8 /* SideMenu.h */,
-				366D70202C76587A008955C8 /* Utils */,
 				366D70192C76585B008955C8 /* CustomTabBar */,
-				366D70102C765853008955C8 /* SideMenu */,
+				366D70202C76587A008955C8 /* Utils */,
+				366D70102C765853008955C8 /* SideMenuInt */,
 				366D6FF62C76582A008955C8 /* SideMenu.docc */,
 			);
 			path = SideMenu;
@@ -110,7 +110,7 @@
 			path = SideMenuTests;
 			sourceTree = "<group>";
 		};
-		366D70102C765853008955C8 /* SideMenu */ = {
+		366D70102C765853008955C8 /* SideMenuInt */ = {
 			isa = PBXGroup;
 			children = (
 				366D700C2C765853008955C8 /* SideButtonModifier.swift */,
@@ -118,7 +118,7 @@
 				366D700E2C765853008955C8 /* SideMenuContent.swift */,
 				366D700F2C765853008955C8 /* SideMenuPreferenceKey.swift */,
 			);
-			path = SideMenu;
+			path = SideMenuInt;
 			sourceTree = "<group>";
 		};
 		366D70192C76585B008955C8 /* CustomTabBar */ = {

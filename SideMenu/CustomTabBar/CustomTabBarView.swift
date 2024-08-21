@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct CustomTabBarView: View {
+public struct CustomTabBarView: View {
     
     let tabs : [TabBarItem]
     @Binding var selection : TabBarItem
     @Namespace private var nameSpace
     
-    private func tabView (_ tabItem :  TabBarItem) -> some View {
+     func tabView (_ tabItem :  TabBarItem) -> some View {
         VStack{
             Image(systemName: tabItem.iconName)
                 .font(.subheadline)
@@ -39,7 +39,7 @@ struct CustomTabBarView: View {
         }
     }
     
-    var body: some View
+    public var body: some View
     {
         tabBarVersion()
     }
