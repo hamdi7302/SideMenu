@@ -15,7 +15,7 @@ enum Sextion :  String, Equatable {
 }
 
 
-struct SideMenuContent< Content: View , Tool: View>: View {
+public struct SideMenuContent< Content: View , Tool: View>: View {
     var content : Content
     var tool : Tool
     @Binding var selection : ImageButtonItem
@@ -32,7 +32,7 @@ struct SideMenuContent< Content: View , Tool: View>: View {
         
     }
     
-    var body: some View {
+    public var body: some View {
         
         ZStack(alignment: .topLeading) {
             
@@ -126,7 +126,7 @@ struct SideMenuContent< Content: View , Tool: View>: View {
 extension SideMenuContent where Tool == EmptyView{
     
     // just in case we  don't need Tool
-    init(selection : Binding<ImageButtonItem> , @ViewBuilder content: () -> Content){
+public init(selection : Binding<ImageButtonItem> , @ViewBuilder content: () -> Content){
         self.init(selection: selection, content: content) {
         }
     }

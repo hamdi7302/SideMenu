@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 extension View {
-    func getRect () -> CGRect {
+    public func getRect () -> CGRect {
         return UIScreen.main.bounds
     }
     
-    func addSideMenuButton(item : ImageButtonItem , selected : Binding<ImageButtonItem> ) -> some View {
+    public func addSideMenuButton(item : ImageButtonItem , selected : Binding<ImageButtonItem> ) -> some View {
         self.modifier(SideButton(item: item, section: .main, selected: selected))
         
     }
     
-    func addSideToolButton(item : ImageButtonItem , selected : Binding<ImageButtonItem>  ) -> some View {
+    public func addSideToolButton(item : ImageButtonItem , selected : Binding<ImageButtonItem>  ) -> some View {
         self.modifier(SideButton(item: item, section: .tools, selected: selected))
     }
 }

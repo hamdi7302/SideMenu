@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 
-enum TabBarItem  {
+public enum TabBarItem  {
     case movie ,  serie , favorite
     
     
-    var title : String {
+    public var title : String {
         switch self {
       
         case .movie:
@@ -25,7 +25,7 @@ enum TabBarItem  {
         }
     }
     
-    var iconName : String {
+    public  var iconName : String {
         switch self {
         case .movie:
             return "movieclapper"
@@ -36,7 +36,7 @@ enum TabBarItem  {
         }
     }
     
-    var color : Color {
+    public  var color : Color {
         switch self {
       
         case .movie:

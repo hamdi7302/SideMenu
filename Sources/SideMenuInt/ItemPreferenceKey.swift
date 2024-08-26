@@ -32,7 +32,7 @@ struct  TabBarItemViewModifier  : ViewModifier {
 
 extension View {
     
-    func customTabItem(tab: TabBarItem , selected :  TabBarItem ) -> some View {
+    public func customTabItem(tab: TabBarItem , selected :  TabBarItem ) -> some View {
         self.modifier(TabBarItemViewModifier(tab: tab , selected : selected ))
     }
     
