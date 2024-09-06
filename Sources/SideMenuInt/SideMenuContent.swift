@@ -39,22 +39,25 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
             Color.gray.ignoresSafeArea().opacity(0.5)
             
             SideMenu(selectedSide: $selection, mainSideButtons: $SideButtons, othersSideButtons: $ToolsButtons, settingsSideButtons: $SettingsButtons)
-            ZStack {
+            NavigationView {
                 
-                Color.white.opacity(0.5)
-                    .cornerRadius(12.0)
-                    .offset(x: showMenu ?  -20 : 0)
-                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                    .padding(.vertical , 20)
                 
-                Color.white.opacity(0.5)
-                    .cornerRadius(12.0)
-                    .offset(x: showMenu ?  -40 : 0)
-                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                    .padding(.vertical , 50)
-                
-                // your View here
-                NavigationView{
+                ZStack {
+                    
+                    Color.white.opacity(0.5)
+                        .cornerRadius(12.0)
+                        .offset(x: showMenu ?  -20 : 0)
+                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                        .padding(.vertical , 20)
+                    
+                    Color.white.opacity(0.5)
+                        .cornerRadius(12.0)
+                        .offset(x: showMenu ?  -40 : 0)
+                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                        .padding(.vertical , 50)
+                    
+                    // your View here
+                    
                     content
                         .cornerRadius(12.0)
                         .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0).onTapGesture {
@@ -75,6 +78,7 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
                         }
                         .ignoresSafeArea()
                         .navigationTitle(selection.title)
+                    
                 }
             }
             
@@ -132,3 +136,5 @@ extension SideMenuContent where Tool == EmptyView{
         }
     }
 }
+
+ 
