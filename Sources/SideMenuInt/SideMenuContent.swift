@@ -24,7 +24,7 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
     @State var SettingsButtons : [ImageButtonItem] = []
     
     @State var showMenu : Bool = true
-    init( selection : Binding<ImageButtonItem>, @ViewBuilder content:() -> Content, @ViewBuilder tool:() -> Tool)
+    public  init( selection : Binding<ImageButtonItem>, @ViewBuilder content:() -> Content, @ViewBuilder tool:() -> Tool)
     {
         self.content = content()
         _selection  = selection
@@ -122,13 +122,9 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
 }
 
 
-
 extension SideMenuContent where Tool == EmptyView{
-    
-    // just in case we  don't need Tool
-public init(selection : Binding<ImageButtonItem> , @ViewBuilder content: () -> Content){
+    public init(selection : Binding<ImageButtonItem> , @ViewBuilder content: () -> Content){
         self.init(selection: selection, content: content) {
         }
     }
 }
-
