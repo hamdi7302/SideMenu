@@ -54,24 +54,28 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
                     .padding(.vertical , 50)
                 
                 // your View here
-                
-                content
-                    .cornerRadius(12.0)
-                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0).onTapGesture {
-                        withAnimation(.easeInOut) {
-                            showMenu = false
+                NavigationView{
+                    content
+                        .cornerRadius(12.0)
+                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0).onTapGesture {
+                            withAnimation(.easeInOut) {
+                                showMenu = false
+                            }
                         }
-                    }
-                    .ignoresSafeArea()
-                tool
-                    .cornerRadius(12.0)
-                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                    .onTapGesture {
-                        withAnimation(.easeInOut) {
-                            showMenu = false
+                        .ignoresSafeArea()
+                        .navigationTitle(selection.title)
+                    
+                    tool
+                        .cornerRadius(12.0)
+                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                showMenu = false
+                            }
                         }
-                    }
-                    .ignoresSafeArea()
+                        .ignoresSafeArea()
+                        .navigationTitle(selection.title)
+                }
             }
             
             .scaleEffect(showMenu ? 0.84 : 1 )

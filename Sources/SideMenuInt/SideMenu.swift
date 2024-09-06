@@ -37,6 +37,7 @@ public struct SideMenu: View {
                             }
                         }
                         
+                        Divider()
                         if !othersSideButtons.isEmpty {
                             Divider()
                             Section{
@@ -93,14 +94,4 @@ public struct SideMenu: View {
             
         }
     }
-    
-    
 }
-
-
-
-
-
-
-
-
