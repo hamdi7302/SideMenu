@@ -39,46 +39,48 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
             Color.gray.ignoresSafeArea().opacity(0.5)
             
             SideMenu(selectedSide: $selection, mainSideButtons: $SideButtons, othersSideButtons: $ToolsButtons, settingsSideButtons: $SettingsButtons)
-            NavigationView {
+            
+            ZStack {
                 
+                Color.white.opacity(0.5)
+                    .cornerRadius(12.0)
+                    .offset(x: showMenu ?  -20 : 0)
+                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                    .padding(.vertical , 20)
                 
-                ZStack {
-                    
-                    Color.white.opacity(0.5)
-                        .cornerRadius(12.0)
-                        .offset(x: showMenu ?  -20 : 0)
-                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                        .padding(.vertical , 20)
-                    
-                    Color.white.opacity(0.5)
-                        .cornerRadius(12.0)
-                        .offset(x: showMenu ?  -40 : 0)
-                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                        .padding(.vertical , 50)
-                    
-                    // your View here
-                    
-                    content
-                        .cornerRadius(12.0)
-                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0).onTapGesture {
-                            withAnimation(.easeInOut) {
-                                showMenu = false
+                Color.white.opacity(0.5)
+                    .cornerRadius(12.0)
+                    .offset(x: showMenu ?  -40 : 0)
+                    .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                    .padding(.vertical , 50)
+                
+                NavigationView {
+                    ZStack {
+                        content
+                            .cornerRadius(12.0)
+                            .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0).onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    showMenu = false
+                                }
                             }
-                        }
-                        .ignoresSafeArea()
-                        .navigationTitle(selection.title)
-                    
-                    tool
-                        .cornerRadius(12.0)
-                        .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
-                        .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                showMenu = false
+                            .ignoresSafeArea()
+                        tool
+                            .cornerRadius(12.0)
+                            .shadow(color: .black.opacity(0.07), radius: 5, x: -5, y: 0.0)
+                            .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    showMenu = false
+                                }
                             }
+                            .ignoresSafeArea()
+                        
+                    } .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text(selection.title)
+                                .font(.headline)  // Customize the font
+                                .foregroundColor(selection.color)  // Customize the color of the Nav Bar
                         }
-                        .ignoresSafeArea()
-                        .navigationTitle(selection.title)
-                    
+                    }
                 }
             }
             
@@ -120,15 +122,9 @@ public struct SideMenuContent< Content: View , Tool: View>: View {
                     print("Section 2 items: \(items)")
                 }
             }
-            
-            
         })
-        
-        
     }
-    
 }
-
 
 extension SideMenuContent where Tool == EmptyView{
     public init(selection : Binding<ImageButtonItem> , @ViewBuilder content: () -> Content){
@@ -137,4 +133,4 @@ extension SideMenuContent where Tool == EmptyView{
     }
 }
 
- 
+

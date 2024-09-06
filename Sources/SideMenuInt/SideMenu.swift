@@ -49,7 +49,7 @@ public struct SideMenu: View {
                                     .font(.headline)
                             }
                         }
-                        
+                        Divider()
                         if !settingsSideButtons.isEmpty {
                             Section {
                                 ForEach(settingsSideButtons, id : \.id) { button in
