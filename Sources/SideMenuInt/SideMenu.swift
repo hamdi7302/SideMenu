@@ -13,85 +13,75 @@ public struct SideMenu: View {
     @Binding var othersSideButtons: [ImageButtonItem]
     @Binding var settingsSideButtons: [ImageButtonItem]
     
+    private let sectionSpacing: CGFloat = 16
+    
     public var body: some View {
         VStack {
-            VStack(alignment: .leading){
-                Image(systemName: "apple.logo")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(Color.black)
-                    .scaledToFit()
-                    .frame(height: 60)
-                
-                
-                Text("Movie app ")
-                    .font(.headline)
-                Divider()
-                HStack{
-                    VStack(alignment: .leading){
-                        
-                        Section{
-                            
-                            ForEach(mainSideButtons, id : \.id) { button in
-                                SideTapButton(sideButton : button, selected: $selectedSide)
-                            }
-                        }
-                        
-                        Divider()
-                        if !othersSideButtons.isEmpty {
-                            Divider()
-                            Section{
-                                ForEach(othersSideButtons, id : \.id) { button in
-                                    SideTapButton(sideButton : button, selected: $selectedSide)
-                                }
-                            } header: {
-                                Text("Tools")
-                                    .font(.headline)
-                            }
-                        }
-                        Divider()
-                        if !settingsSideButtons.isEmpty {
-                            Section {
-                                ForEach(settingsSideButtons, id : \.id) { button in
-                                    SideTapButton(sideButton : button, selected: $selectedSide)
-                                }
-                                
-                            }header: {
-                                Text("Others")
-                                    .font(.headline)
-                            }
-                        }
-                        
-                    }
-                    Spacer()
-                    
-                }
-                .padding()
-                Spacer()
-                
-                Text("Version : 1.0.0")
-                    .font(.caption)
-                    .fontWeight(.bold)
-                
-            }.padding()
+            headerView
+            Divider()
+            sideMenuContent
+            Spacer()
+            footerView
+        }
+        .padding()
+    }
+    
+    // MARK: - Header View
+    private var headerView: some View {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
+            Image(systemName: "apple.logo")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Color.black)
+                .scaledToFit()
+                .frame(height: 60)
             
-            
-            HStack{
+            Text("Movie App")
+                .font(.headline)
+        }
+    }
+    
+    // MARK: - Side Menu Content
+    private var sideMenuContent: some View {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
+            sectionView(title: "Content", buttons: mainSideButtons)
+            if !othersSideButtons.isEmpty {
+                sectionView(title: "Tools", buttons: othersSideButtons)
+            }
+            if !settingsSideButtons.isEmpty {
+                sectionView(title: "Others", buttons: settingsSideButtons)
+            }
+        }
+        .padding()
+    }
+    
+    // MARK: - Section View
+    private func sectionView(title: String, buttons: [ImageButtonItem]) -> some View {
+        Section(header: Text(title).font(.headline)) {
+            ForEach(buttons, id: \.id) { button in
+                SideTapButton(sideButton: button, selected: $selectedSide)
+            }
+        }
+    }
+    
+    // MARK: - Footer View
+    private var footerView: some View {
+        VStack {
+            Text("Version: 1.0.0")
+                .font(.caption)
+                .fontWeight(.bold)
+            HStack {
                 Image(systemName: "bolt")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 10)
-                HStack(spacing: 3){
-                    Text("Powered by")
-                        .font(.caption2)
-                    
-                    Text("Mee")
-                        .font(.caption2)
-                        .fontWeight(.bold)
-                    
-                }
-            }.ignoresSafeArea()
-            
+                Text("Powered by")
+                    .font(.caption2)
+                Text("Mee")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+            }
         }
+        .ignoresSafeArea()
     }
 }
