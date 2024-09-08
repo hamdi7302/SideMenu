@@ -13,13 +13,11 @@ public struct SideMenu: View {
     @Binding var othersSideButtons: [ImageButtonItem]
     @Binding var settingsSideButtons: [ImageButtonItem]
     
-    private let sectionSpacing: CGFloat = 16
-    
     public var body: some View {
         VStack {
             headerView
             Divider()
-            sideMenuContent
+            menuSections
             Spacer()
             footerView
         }
@@ -28,7 +26,7 @@ public struct SideMenu: View {
     
     // MARK: - Header View
     private var headerView: some View {
-        VStack(alignment: .leading, spacing: sectionSpacing) {
+        VStack(alignment: .leading) {
             Image(systemName: "apple.logo")
                 .resizable()
                 .renderingMode(.template)
@@ -36,23 +34,40 @@ public struct SideMenu: View {
                 .scaledToFit()
                 .frame(height: 60)
             
-            Text("Movie App")
+            Text("Movie app")
                 .font(.headline)
         }
+        .frame(maxWidth: .infinity, alignment: .leading) // Ensure header is aligned to the left
     }
     
-    // MARK: - Side Menu Content
-    private var sideMenuContent: some View {
-        VStack(alignment: .leading, spacing: sectionSpacing) {
-            sectionView(title: "Content", buttons: mainSideButtons)
+    // MARK: - Menu Sections
+    private var menuSections: some View {
+        VStack(alignment: .leading) {
+            contentSection
+            Divider()
             if !othersSideButtons.isEmpty {
-                sectionView(title: "Tools", buttons: othersSideButtons)
+                toolsSection
             }
             if !settingsSideButtons.isEmpty {
-                sectionView(title: "Others", buttons: settingsSideButtons)
+                othersSection
             }
         }
         .padding()
+    }
+    
+    // MARK: - Content Section
+    private var contentSection: some View {
+        sectionView(title: "Content", buttons: mainSideButtons)
+    }
+    
+    // MARK: - Tools Section
+    private var toolsSection: some View {
+        sectionView(title: "Tools", buttons: othersSideButtons)
+    }
+    
+    // MARK: - Others Section
+    private var othersSection: some View {
+        sectionView(title: "Others", buttons: settingsSideButtons)
     }
     
     // MARK: - Section View
@@ -70,13 +85,16 @@ public struct SideMenu: View {
             Text("Version: 1.0.0")
                 .font(.caption)
                 .fontWeight(.bold)
+            
             HStack {
                 Image(systemName: "bolt")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 10)
+                
                 Text("Powered by")
                     .font(.caption2)
+                
                 Text("Mee")
                     .font(.caption2)
                     .fontWeight(.bold)
