@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ButtonItem: View {
+    @ObservedObject var viewModel: SideMenuViewModel
     var sideMenuButton: SideMenuButton
     var body: some View {
         HStack{
@@ -20,6 +21,6 @@ struct ButtonItem: View {
     }
 }
 
-#Preview {
-    ButtonItem(sideMenuButton: SideMenuButton(title: "Movie", image: "popcorn.circle.fill", sectionType: .Main))
-}
+//#Preview {
+//    ButtonItem(viewModel: SideMenuView(viewModel: SideMenuViewModel), sideMenuButton: SideMenuButton(title: "Movie", image: "popcorn.circle.fill", sectionType: .Main))
+//}

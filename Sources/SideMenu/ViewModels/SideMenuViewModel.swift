@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by hamdi on 11/9/2024.
 //
@@ -12,11 +12,13 @@ public class SideMenuViewModel: ObservableObject {
     @Published var selectedButton: SideMenuButton{
         didSet{
             buttonTapped(selectedButton)
+            showMenu.toggle()
         }
     }
     @Published var sideMenuButtons: [SideMenuButton]
     @Published var showMenu: Bool = true
     @Published var desiredContent: AnyView = AnyView(Color.clear)
+    @Published var showMenuAndSearchButton: Bool = false
     
     let contentLoader: ContentLoader
     var buttonsProvider: [String] {
@@ -25,19 +27,19 @@ public class SideMenuViewModel: ObservableObject {
     
     func buttonTapped(_ sideButton : SideMenuButton) {
         getContent(by: sideButton.title)
-       }
-    
-    func getContent(by title: String ) {
-        desiredContent = contentLoader.loadContent(with: title)
     }
     
-public init(sideMenuButtons: [SideMenuButton], contentLoader: ContentLoader) {
+    func getContent(by title: String) {
+        desiredContent = contentLoader.loadContent(with: title)
+        showMenuAndSearchButton = true
+    }
+    
+    public init(sideMenuButtons: [SideMenuButton], contentLoader: ContentLoader) {
         assert(!sideMenuButtons.isEmpty, "SideMenuButtons should not be empty.")
         self.sideMenuButtons = sideMenuButtons
         self.selectedButton = sideMenuButtons.first!
         self.contentLoader = contentLoader
         getContent(by: sideMenuButtons.first!.title)
-      
     }
 }
 
@@ -51,38 +53,6 @@ public init(sideMenuButtons: [SideMenuButton], contentLoader: ContentLoader) {
 
 import SwiftUI
 
-
-//struct SideMenuPreview: PreviewProvider {
-//
-//    static let buttonsProvider = {return buttons.map({$0.title})}()
-//    static let buttons = [
-//        SideMenuButton(title: "Movie", image: "movieclapper", sectionType: SectionType.Main),
-//        SideMenuButton(title: "Series", image: "play.rectangle", sectionType: SectionType.Main),
-//        SideMenuButton(title: "Favoris", image: "star.square", sectionType: SectionType.Main),
-//        SideMenuButton(title: "Settings", image: "gearshape", sectionType: SectionType.Settings),
-//        SideMenuButton(title: "Tools", image: "rectangle.on.rectangle.badge.gearshape", sectionType: SectionType.Tools)
-//    ]
-//    static var previews: some View {
-//
-//
-//        SideMenuView(
-//            content: ZStack {
-//                // Your content goes here
-//            },
-//            viewModel: SideMenuViewModel(sideMenuButtons: buttons, contentLoader: MyContentLoader(buttonsTitle: buttonsProvider))
-//        )
-//    }
-//}
-
-
-
-
-
- 
-
-
-
- 
 
 struct sidemenuFooter: View {
     var body: some View {
@@ -126,8 +96,8 @@ struct ContentPresentation: View {
                 }
                 .padding()
             }
-             
-             
+            
+            
             // All Movies Section
             SectionHeaderView(title: "All Movies")
             
@@ -170,7 +140,7 @@ struct SectionHeaderView: View {
 
 
 public extension Color {
-
+    
     static func random(randomOpacity: Bool = false) -> Color {
         Color(
             red: .random(in: 0...1),
@@ -180,3 +150,5 @@ public extension Color {
         )
     }
 }
+
+

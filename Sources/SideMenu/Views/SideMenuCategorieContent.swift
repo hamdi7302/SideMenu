@@ -17,8 +17,9 @@ struct SideMenuCategorieContent: View {
             ForEach(subitems) { item in
                 Button(action: {
                     viewModel.selectedButton = item
+                    
                 }, label: {
-                    ButtonItem(sideMenuButton: item)
+                    ButtonItem(viewModel: viewModel, sideMenuButton: item)
                         .foregroundColor(.primary)
                 })
             }
