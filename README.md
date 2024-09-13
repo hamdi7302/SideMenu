@@ -1,60 +1,79 @@
-# SideMenu Package
+# SideMenu Swift Package
 
-A custom SwiftUI package to create a side menu with selectable items and tool buttons. This package simplifies the process of adding a side menu to your SwiftUI apps and managing state between the menu items and the main content.
+`SideMenu` is a SwiftUI package for creating a customizable side menu with dynamic content loading capabilities, leveraging MVVM architecture and dependency injection (DI). 
+This package provides an easy-to-integrate solution for side menus with dynamic content.
 
 ## Features
 
-- Customizable side menu with various buttons and icons.
-- Easy integration with SwiftUI's state management using `@State`.
-- Support for tool buttons in a side toolbar.
+- **Customizable Side Menu**: Easily configure buttons and their appearances.
+- **Dynamic Content Loading**: Load different views based on the selected menu item.
+- **SwiftUI Integration**: Seamlessly integrates with SwiftUI projects.
+- **Swift Package Manager (SPM)**: Simple integration with SPM.
+
+## Requirements
+
+- **iOS**: 14.0+
+- **Xcode**: 12.0+
+- **Swift**: 5.3+
 
 ## Installation
 
-### Swift Package Manager
+### Swift Package Manager (SPM)
 
-1. Open your Xcode project.
-2. Go to File > Add Packages.
-3. Enter the URL of this repository.
-4. Choose the latest version and add the package to your project.
+To add `SideMenu` to your project:
+
+1. Open your project in Xcode.
+2. Navigate to `File` > `Add Packages...`.
+3. Enter the following URL in the search bar:  
+https://github.com/hamdi7302/SideMenuPackage
+4. Choose the package and add it to your project.
 
 ## Usage
 
-Here is an example of how to use the `SideMenu` package in your SwiftUI project.
+### 1. Define Side Menu Buttons
 
-### Basic Example
+Create instances of `SideMenuButton` to represent each item in the side menu. Each button requires a title, an image, and a section type.
 
 ```swift
-import SwiftUI
-import SideMenu
+let buttons = [
+ SideMenuButton(title: "Movie", image: "movieclapper", sectionType: SectionType.Main),
+ SideMenuButton(title: "Series", image: "play.rectangle", sectionType: SectionType.Main),
+ SideMenuButton(title: "Tools", image: "wrench", sectionType: SectionType.Tools)
+]
+```
 
-struct MyView: View {
-    @State var selected = ImageButtonItem(title: "Series", logo: "movieclapper.fill", color: .orange)
-    @State var selectedTabbar: TabBarItem = .movie
+### 2. Create a Content Loader
+```swift
+class MyContentLoader: ContentLoader {
+    private var buttonsTitle: [String]
 
-    var body: some View {
-        SideMenuContent(selection: $selected, content: {
-            VStack {
-                // Main TabView content
-                TabViewContent(selection: $selectedTabbar) {
-                    Color.blue.customTabItem(tab: .movie, selected: selectedTabbar)
-                    Color.cyan.customTabItem(tab: .serie, selected: selectedTabbar)
-                }
-            }
-            .addSideMenuButton(item: ImageButtonItem(title: "Movies", logo: "popcorn.fill", color: .blue), selected: $selected)
-            
-            VStack {
-                Color.indigo
-            }
-            .addSideMenuButton(item: ImageButtonItem(title: "Series", logo: "movieclapper.fill", color: .indigo), selected: $selected)
-            
-            VStack {
-                Color.brown
-            }
-            .addSideMenuButton(item: ImageButtonItem(title: "Podcasts", logo: "homepod.fill", color: .brown), selected: $selected)
-        }, tool: {
-            // Tool buttons in side toolbar
-            Color.pink.addSideToolButton(item: ImageButtonItem(title: "Favorite", logo: "star.fill", color: .pink), selected: $selected)
-            Color.gray.addSideToolButton(item: ImageButtonItem(title: "Settings", logo: "gearshape.fill", color: .gray), selected: $selected)
-        })
+    init(buttonsTitle: [String]) {
+        self.buttonsTitle = buttonsTitle
+    }
+
+    func loadContent(with title: String) -> AnyView {
+        switch title {
+        case "Movie":
+            return AnyView(ContentPresentation()) // Replace with your movie view
+        case "Series":
+            return AnyView(ContentPresentation()) // Replace with your series view
+        case "Tools":
+            return AnyView(ContentPresentation()) // Replace with your tools view
+        default:
+            return AnyView(Text("Not Available \(title) Content"))
+        }
     }
 }
+```
+### 3. Use the Side Menu in Your View
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        SideMenuView(viewModel: SideMenuViewModel(sideMenuButtons: buttons, 
+                     contentLoader: MyContentLoader(buttonsTitle: buttons.map { $0.title }))
+    }
+}
+```
+
+
