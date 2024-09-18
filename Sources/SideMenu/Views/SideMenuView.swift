@@ -17,7 +17,7 @@ public struct SideMenuView: View {
     @State var applyAnimationOnshowSideMenu =  false
     
     var backGroundView: some View {
-        LinearGradient(gradient: Gradient(colors: [.cyan, .black, .black, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea()
+        LinearGradient(gradient: Gradient(colors: [.cyan, .black, .black, .red]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea()
     }
     
     var sideLeftMenu: some View {
