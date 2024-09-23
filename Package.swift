@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "SideMenuPackage",
     platforms: [
-        .iOS(.v15) // Specify the minimum iOS version you support
+        .iOS(.v16) // Specify the minimum iOS version you support
     ],
     products: [
         .library(
